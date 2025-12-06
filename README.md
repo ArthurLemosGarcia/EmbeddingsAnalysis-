@@ -1,28 +1,43 @@
-Análise de Embeddings e Redução da Dimensionalidade com BERT
-Este projeto consiste em um Jupyter Notebook que explora o uso de modelos de linguagem (BERT) para transformar textos em vetores numéricos (embeddings), visualizá-los em espaços de baixa dimensão e realizar agrupamento (clustering) semântico.
+# 🧠 Análise de Embeddings e Redução de Dimensionalidade com BERT
 
-📋 Visão Geral
-O objetivo principal é demonstrar como máquinas "entendem" o significado de frases. O fluxo de trabalho abrange:
+## 🚀 Sobre o Projeto
 
-Geração de Embeddings: Conversão de frases em vetores de 768 dimensões usando BERT.
+O objetivo deste notebook é desmistificar como as máquinas "entendem" o contexto das palavras. Ao invés de apenas contar palavras, utilizamos _Deep Learning_ para capturar nuances.
 
-Redução de Dimensionalidade: Compressão desses vetores para 2 dimensões para visualização gráfica.
+O projeto passa por quatro etapas principais:
+1.  **Extração de Features:** Uso do BERT para gerar vetores de 768 dimensões.
+2.  **Visualização:** Compressão desses vetores para 2D usando PCA, t-SNE e UMAP.
+3.  **Clusterização:** Uso do K-Means para encontrar tópicos automaticamente.
+4.  **Classificação:** Um sistema simples para categorizar novas frases com base nos clusters aprendidos.
 
-Clusterização: Agrupamento automático de frases similares.
+---
 
-Classificação: Criação de uma função para categorizar novos textos baseada nos grupos formados.
+## 🛠 Tecnologias Utilizadas
 
-🛠️ Tecnologias Utilizadas
-O projeto foi desenvolvido em Python utilizando as seguintes bibliotecas:
+| Biblioteca | Função Principal |
+| :--- | :--- |
+| **Transformers** | Acesso ao modelo pré-treinado `bert-base-uncased`. |
+| **PyTorch** | Backend para processamento dos tensores do modelo. |
+| **Scikit-Learn** | Algoritmos de PCA, t-SNE e K-Means. |
+| **UMAP-Learn** | Técnica avançada de redução de dimensionalidade (preserva estrutura global). |
+| **Matplotlib** | Plotagem dos gráficos de dispersão. |
 
-Transformers (Hugging Face): Para carregar o modelo BERT pré-treinado.
+---
 
-PyTorch: Backend para processamento do modelo.
+## 🔬 Pipeline de Análise
 
-Scikit-Learn: Para PCA, t-SNE e K-Means.
+### 1. Geração de Embeddings
+Cada frase da base de dados é tokenizada e passada pelo modelo BERT. Utilizamos a média da última camada oculta (_last hidden state_) para criar uma representação vetorial densa da frase.
 
-UMAP-learn: Para a técnica de redução UMAP.
+### 2. Redução de Dimensionalidade
+Para visualizar os dados, comparamos três técnicas:
+* **PCA:** Rápido, focado na variância global.
+* **t-SNE:** Excelente para agrupar vizinhos locais, mas computacionalmente pesado.
+* **UMAP:** O melhor dos dois mundos; rápido e preserva tanto a estrutura global quanto a local.
 
-Matplotlib: Para plotagem dos gráficos.
-
-NumPy: Para manipulação de arrays e vetores.
+### 3. Agrupamento (Clustering)
+Utilizamos o algoritmo **K-Means** com `k=4`. O modelo identificou automaticamente os seguintes temas nos textos:
+* 🍳 **Culinária**
+* 🌍 **Geografia**
+* 📈 **Finanças**
+* 🤖 **Tecnologia/IA**
